@@ -1,6 +1,9 @@
 package com.example.exam01;
 
+import java.util.HashMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -15,8 +19,10 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 // @RequestMapping("/items")
 public class MyController {
+    	
     
-	@Autowired
+    KakaoAPI kakaoApi = new KakaoAPI();
+    @Autowired
 	HttpSession session;
     @Autowired
     private MemberDAO mdao;
@@ -150,8 +156,24 @@ public class MyController {
         }
     }
 
+    @RequestMapping("/kakaologin")
+	public String login(@RequestParam("code") String code, HttpSession session, Model model) {
+		// 1번 인증코드 요청 전달
+		String accessToken = kakaoApi.getAccessToken(code);
+		// 2번 인증코드로 토큰 전달
+		HashMap<String, Object> userInfo = kakaoApi.getUserInfo(accessToken);
+		
+		System.out.println("login info : " + userInfo.toString());
+		
+		if(userInfo.get("email") != null) {
+			session.setAttribute("kakaouserId", userInfo.get("email"));
+			session.setAttribute("accessToken", accessToken);
+		}
+		model.addAttribute("userId", userInfo.get("email"));
+		return "home";
+	}
 
-	@RequestMapping("/callback")
+	@RequestMapping("/callback")    
 	public String callback() {
 		return "callback";
 	}

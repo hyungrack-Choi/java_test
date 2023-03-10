@@ -30,6 +30,7 @@ dependencies {
 	implementation fileTree(dir: 'lib', include: '*.jar')
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	// implementation 'org.mongodb:mongo-java-driver:3.12.11'
+	implementation 'com.google.code.gson:gson:2.8.7'
 }
 
 tasks.named('test') {

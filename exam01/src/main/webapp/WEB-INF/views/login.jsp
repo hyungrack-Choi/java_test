@@ -37,7 +37,8 @@ table .td {
 		</tr>
 		<tr>
 			<td style="text-align: left"><a href="/callback">네이버</a>
-			<td style="text-align: right"><a href="/kakaologin">카카오</a></td>
+			<td style="text-align: right"><a href="https://kauth.kakao.com/oauth/authorize?client_id=ee129a2043699f49748f570e630038e7&redirect_uri=http://localhost:8080/kakaologin&response_type=code">
+				<img src = "img/kakao_login_medium_narrow.png"></a></td>
 		</tr>
 		<tr>
 			<td style="text-align: left" onclick="naverLogout(); return false;">
