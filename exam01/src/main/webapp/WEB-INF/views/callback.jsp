@@ -31,12 +31,14 @@
 		// alert(naver_id_login.getProfileData('email'));
 		// alert(naver_id_login.getProfileData('age'));
 		data = naver_id_login.getProfileData('nickname');
-		// if(data == ''){
-		// 	document.location="/login";
-		// }else {
-		// 	document.location="/?naverid="+data;
+		accs_token = naver_id_login.getAccessToken();
+		console.log(accs_token);
+		if(data == ''){
+			document.location="/login";
+		}else {
+			document.location="/?naverid="+data;
 
-		// }
+		}
 	}
 
 	// 네이버 사용자 프로필 조회

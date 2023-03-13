@@ -10,7 +10,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Data
-@Document(collection = "users_info") // DB안에 user_info라는 컬렉션에 저장 (table개념)
+@Document(collection = "users") // DB안에 user_info라는 컬렉션에 저장 (table개념)
 public class Member {
 
     // private String m_id;        // mongoDB에서 객체를 식별하기 위한 id

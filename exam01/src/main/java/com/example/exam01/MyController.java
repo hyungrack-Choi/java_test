@@ -34,6 +34,8 @@ public class MyController {
     String naverid = req.getParameter("naverid");
     HttpSession s = req.getSession();// session 초기화 선언
     s.setAttribute("naverid", naverid);
+
+    
     model.addAttribute("naverid", (String) s.getAttribute("naverid"));
     model.addAttribute("gUserid", (String) s.getAttribute("gUserid"));
     // List<Chart> images = chartRepository.findAll();
@@ -69,9 +71,11 @@ public class MyController {
 		String str = "";
 		HttpSession session = req.getSession();// 초기화
 		String userid = (String) session.getAttribute("gUserid");
-		String naverid = (String) session.getAttribute("naverid");
+		String naverid = (String) session.getAttribute("naverid");        
+		String kakaoid = (String) session.getAttribute("kakaoId");
 		System.out.println("userid==" + userid);
 		System.out.println("naverid==" + naverid);
+		System.out.println("kakaoid==" + kakaoid);
 		if (userid != null) {
 			if (userid == null || userid.equals("")) {
 				str = "";
@@ -84,6 +88,13 @@ public class MyController {
 				str = "";
 			} else {
 				str = naverid;
+			}
+		}
+		if (kakaoid != null) {
+			if (kakaoid == null || kakaoid.equals("")) {
+				str = "";
+			} else {
+				str = kakaoid;
 			}
 		}
 		System.out.println("str[" + str + "]");
@@ -166,10 +177,10 @@ public class MyController {
 		System.out.println("login info : " + userInfo.toString());
 		
 		if(userInfo.get("email") != null) {
-			session.setAttribute("kakaouserId", userInfo.get("email"));
+			session.setAttribute("kakaoId", userInfo.get("email"));
 			session.setAttribute("accessToken", accessToken);
 		}
-		model.addAttribute("userId", userInfo.get("email"));
+		model.addAttribute("kakaoId", userInfo.get("email"));
 		return "home";
 	}
 
